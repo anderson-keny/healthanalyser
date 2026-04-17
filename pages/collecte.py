@@ -9,6 +9,71 @@ st.markdown("---")
 
 tabs = st.tabs(["Saisie manuelle", "Import CSV/Excel", "Donnees depuis URL", "Generation synthetique"])
 
+with tabs[0]:
+    st.markdown("### Saisie manuelle d un patient")
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        nom = st.text_input("Nom du patient")
+        age = st.number_input("Age (ans)", 1, 120, 30)
+        sexe = st.selectbox("Sexe", ["Homme", "Femme"])
+        poids = st.number_input("Poids (kg)", 10.0, 300.0, 70.0)
+        taille = st.number_input("Taille (cm)", 50.0, 250.0, 170.0)
+
+    with col2:
+        tension_sys = st.number_input("Tension systolique (mmHg)", 60, 250, 120)
+        tension_dia = st.number_input("Tension diastolique (mmHg)", 40, 150, 80)
+        glycemie = st.number_input("Glycemie (g/L)", 0.5, 5.0, 1.0)
+        cholesterol = st.number_input("Cholesterol (g/L)", 0.5, 5.0, 1.8)
+        frequence_cardiaque = st.number_input("Frequence cardiaque (bpm)", 30, 200, 75)
+
+    with col3:
+        fumeur = st.selectbox("Fumeur", ["Non", "Oui"])
+        activite = st.selectbox("Activite physique", ["Sedentaire", "Moderee", "Intense"])
+        diabete = st.selectbox("Diabete", ["Non", "Oui"])
+        antecedents = st.selectbox("Antecedents cardiaques", ["Non", "Oui"])
+        date_saisie = st.date_input("Date de saisie")
+
+    if st.button("Enregistrer le patient", type="primary"):
+        imc = round(poids / ((taille / 100) ** 2), 2)
+        if imc < 18.5:
+            statut_imc = "Sous-poids"
+        elif imc < 25:
+            statut_imc = "Normal"
+        elif imc < 30:
+            statut_imc = "Surpoids"
+        else:
+            statut_imc = "Obesite"
+
+        risque = 0
+        if tension_sys > 140: risque += 1
+        if glycemie > 1.26: risque += 1
+        if cholesterol > 2.0: risque += 1
+        if fumeur == "Oui": risque += 1
+        if antecedents == "Oui": risque += 2
+        if age > 60: risque += 1
+        niveau_risque = "Faible" if risque <= 1 else "Modere" if risque <= 3 else "Eleve"
+
+        nouveau_patient = {
+            "nom": nom, "age": age, "sexe": sexe,
+            "poids": poids, "taille": taille, "imc": imc, "statut_imc": statut_imc,
+            "tension_systolique": tension_sys, "tension_diastolique": tension_dia,
+            "glycemie": glycemie, "cholesterol": cholesterol,
+            "frequence_cardiaque": frequence_cardiaque,
+            "fumeur": fumeur, "activite_physique": activite,
+            "diabete": diabete, "antecedents_cardiaques": antecedents,
+            "niveau_risque": niveau_risque, "date_saisie": str(date_saisie)
+        }
+
+        os.makedirs("data", exist_ok=True)
+        fichier = "data/health_data.csv"
+        if os.path.exists(fichier):
+            df = pd.read_csv(fichier)
+            df = pd.concat([df, pd.DataFrame([nouveau_patient])], ignore_index=True)
+        else:
+            df = pd.DataFrame([nouveau_patient])
+        df.to_csv(fichier, index=False)
+
         st.success(f"Patient enregistre ! IMC : {imc} ({statut_imc}) | Risque : {niveau_risque}")
         col_a, col_b, col_c = st.columns(3)
         col_a.metric("IMC calcule", imc, statut_imc)
@@ -64,45 +129,15 @@ with tabs[3]:
         diabete = np.random.choice(["Non", "Oui"], n, p=[0.85, 0.15])
         antecedents = np.random.choice(["Non", "Oui"], n, p=[0.8, 0.2])
 
-        # Calcul niveau de risque
-        niveau_risque = []
-        for i in range(n):
-            score = 0
-            if tension_sys[i] > 140: score += 1
-            if glycemie[i] > 1.26: score += 1
-            if cholesterol[i] > 2.0: score += 1
-            if fumeurs[i] == "Oui": score += 1
-            if antecedents[i] == "Oui": score += 2
-            if ages[i] > 60: score += 1
-            if score <= 1:
-                niveau_risque.append("Faible")
-            elif score <= 3:
-                niveau_risque.append("Modere")
-            else:
-                niveau_risque.append("Eleve")
-
-        statut_imc = []
-        for val in imc:
-            if val < 18.5:
-                statut_imc.append("Sous-poids")
-            elif val < 25:
-                statut_imc.append("Normal")
-            elif val < 30:
-                statut_imc.append("Surpoids")
-            else:
-                statut_imc.append("Obesite")
-
         df_synth = pd.DataFrame({
             "nom": [f"Patient_{i+1}" for i in range(n)],
             "age": ages, "sexe": sexes,
             "poids": poids.round(1), "taille": tailles.round(1), "imc": imc,
-            "statut_imc": statut_imc,
             "tension_systolique": tension_sys, "tension_diastolique": tension_dia,
             "glycemie": glycemie, "cholesterol": cholesterol,
             "frequence_cardiaque": fc,
             "fumeur": fumeurs, "activite_physique": activites,
             "diabete": diabete, "antecedents_cardiaques": antecedents,
-            "niveau_risque": niveau_risque,
             "date_saisie": str(datetime.today().date())
         })
 
