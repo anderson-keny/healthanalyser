@@ -56,8 +56,8 @@ with st.sidebar:
 if selected == "Accueil":
     st.markdown("""
     <div class='title-card'>
-        <h1 style='color:white; font-size:2.5rem;'>HealthAnalytics AI</h1>
-        <p style='color:#e0e0e0; font-size:1.2rem;'>Plateforme intelligente d analyse de donnees de sante</p>
+        <h1 style='font-size:2.5rem; background: linear-gradient(90deg, #FFD700, #FF6B6B); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; letter-spacing: 2px;'>MCLAURENT HEALTH DIAGNOSTIC CENTER</h1>
+        <p style='color:#00E5FF; font-size:1.3rem; font-style: italic; font-weight: 600; letter-spacing: 3px; text-shadow: 0 0 10px #00E5FF;'>" YOUR HEALTH, OUR HAPPINESS "</p>
     </div>
     """, unsafe_allow_html=True)
 
