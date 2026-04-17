@@ -65,6 +65,7 @@ with tabs[0]:
             "frequence_cardiaque": frequence_cardiaque,
             "fumeur": fumeur, "activite_physique": activite,
             "diabete": diabete, "antecedents_cardiaques": antecedents,
+ "niveau_risque": ["Faible" if (t > 140) or (g > 1.26) or (c > 2.0) else "Modere" if (t > 120) else "Eleve" if a > 60 else "Faible" for t, g, c, a in zip(tension_sys.tolist(), glycemie.tolist(), cholesterol.tolist(), ages.tolist())],
             "niveau_risque": niveau_risque, "date_saisie": str(date_saisie)
         }
 
@@ -150,6 +151,7 @@ with tabs[3]:
             "frequence_cardiaque": fc,
             "fumeur": fumeurs, "activite_physique": activites,
             "diabete": diabete, "antecedents_cardiaques": antecedents,
+ "niveau_risque": ["Faible" if (t > 140) or (g > 1.26) or (c > 2.0) else "Modere" if (t > 120) else "Eleve" if a > 60 else "Faible" for t, g, c, a in zip(tension_sys.tolist(), glycemie.tolist(), cholesterol.tolist(), ages.tolist())],
             "date_saisie": str(datetime.today().date())
         })
 
