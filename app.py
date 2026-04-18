@@ -92,6 +92,20 @@ if selected == "Accueil":
     else:
         st.warning("Aucune donnee encore. Allez dans Collecte de donnees pour commencer.")
 
+
+    st.markdown("---")
+    st.markdown("### A propos de l auteur")
+    col_photo, col_info = st.columns([1, 3])
+    with col_photo:
+        if os.path.exists("assets/photo.jpg"):
+            st.image("assets/photo.jpg", width=180)
+    with col_info:
+        st.markdown("**ASSOUMOU YENE LAURENT KEVIN JAMES**")
+        st.markdown("Matricule : **24G2332**")
+        st.markdown("Niveau 2 - Universite de Yaounde I")
+        st.markdown("Departement Informatique - INF232 EC2")
+        st.markdown("Republique du Cameroun")
+
 elif selected == "Collecte de donnees":
     exec(open("pages/collecte.py").read())
 elif selected == "Analyse descriptive":
