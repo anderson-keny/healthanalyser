@@ -104,6 +104,8 @@ elif selected == "Clustering et PCA":
     exec(open("pages/clustering.py").read())
 elif selected == "Outils medicaux":
  exec(open("pages/outils.py").read())
+elif selected == "Licence":
+ exec(open("pages/licence.py").read())
 elif selected == "Guide d utilisation":
  exec(open("pages/guide.py").read())
 elif selected == "Assistant IA":
