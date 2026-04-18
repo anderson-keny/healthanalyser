@@ -515,3 +515,5 @@ Patient_513,71,Femme,65.0,176.4,20.87,118,70,1.19,1.13,62,Non,Moderee,Non,Non,20
 Patient_514,65,Femme,79.9,180.4,24.56,138,70,1.12,1.74,82,Non,Sedentaire,Non,Non,2026-04-17,,
 Patient_515,56,Homme,96.3,169.3,33.6,153,84,1.12,1.17,74,Oui,Sedentaire,Non,Oui,2026-04-17,,
 assoumou,30,Homme,180.0,216.0,38.58,120,70,1.0,1.8,76,Non,Intense,Oui,Oui,2026-04-17,Obesite,Modere
+laurent,30,Homme,56.0,190.0,15.51,120,90,1.0,2.0,78,Non,Sedentaire,Non,Non,2026-01-10,Sous-poids,Faible
+gerard,20,Homme,100.0,150.0,44.44,127,73,2.0,2.09,82,Oui,Sedentaire,Oui,Oui,2026-04-18,Obesite,Eleve

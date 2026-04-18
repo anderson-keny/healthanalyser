@@ -10,3 +10,4 @@ openpyxl
 requests
 streamlit-option-menu
 streamlit-lottie
+statsmodels
