@@ -37,10 +37,8 @@ with st.sidebar:
     st.markdown("---")
     selected = option_menu(
         menu_title=None,
-        options=["Accueil", "Collecte de donnees", "Analyse descriptive",
-                 "Regression", "Classification", "Clustering et PCA", "Outils medicaux", "Assistant IA", "Guide d utilisation"],
-        icons=["house", "database", "bar-chart", "graph-up",
-               "shield-check", "diagram-3", "heart-pulse", "robot", "book"],
+        options=["Accueil", "Collecte de donnees", "Analyse descriptive", "Regression", "Classification", "Clustering et PCA", "Outils medicaux", "Assistant IA", "Guide d utilisation", "Licence"],
+        icons=["house", "database", "bar-chart", "graph-up", "shield-check", "diagram-3", "heart-pulse", "robot", "book", "award"],
         default_index=0,
         styles={
             "container": {"background-color": "#1e2130"},
