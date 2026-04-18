@@ -33,14 +33,14 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 with st.sidebar:
-    st.markdown("## HealthAnalytics AI")
+    st.markdown("## MENU")
     st.markdown("---")
     selected = option_menu(
         menu_title=None,
         options=["Accueil", "Collecte de donnees", "Analyse descriptive",
-                 "Regression", "Classification", "Clustering et PCA", "Assistant IA"],
+                 "Regression", "Classification", "Clustering et PCA", "Outils medicaux", "Assistant IA", "Guide d utilisation"],
         icons=["house", "database", "bar-chart", "graph-up",
-               "shield-check", "diagram-3", "robot"],
+               "shield-check", "diagram-3", "heart-pulse", "robot", "book"],
         default_index=0,
         styles={
             "container": {"background-color": "#1e2130"},
@@ -102,5 +102,9 @@ elif selected == "Classification":
     exec(open("pages/classification.py").read())
 elif selected == "Clustering et PCA":
     exec(open("pages/clustering.py").read())
+elif selected == "Outils medicaux":
+ exec(open("pages/outils.py").read())
+elif selected == "Guide d utilisation":
+ exec(open("pages/guide.py").read())
 elif selected == "Assistant IA":
     exec(open("pages/assistant.py").read())
